@@ -8,7 +8,7 @@ class BaseClass(Storage):
         self._capacity = capacity
 
     def add(self, title: str, count: int):
-        if self.get_free_space > int(count):
+        if self.get_free_space >= int(count):
             self._items[title] = self._items.get(title, 0) + int(count)
         else:
             print('превышение лимита')

@@ -1,3 +1,6 @@
+from art import aprint
+
+
 class Request:
     def __init__(self, all_storage, waybill):
         self.all_storage = all_storage
@@ -10,11 +13,11 @@ class Request:
         self._product = split_list[2]
 
     def move(self):
-
         try:
             if self._from in self.all_storage.keys() or self._to in self.all_storage.keys():
                 if self.all_storage[self._from].get_items[self._product] >= self._amount:
-                    if self.all_storage[self._to].get_unique_items_count < 5:
+                    if self.all_storage[self._to].get_unique_items_count <= 5 and self.all_storage[self._to].get_free_space >= self._amount:
+                        aprint(artname='happy', number=3)
                         print(f'На складе ЕСТЬ нужное количество\n{"_" * 20}')
 
                         self.all_storage[self._from].remove(self._product, self._amount)
@@ -28,6 +31,7 @@ class Request:
                     else:
                         print(f'В магазин недостаточно места, попробуйте что то другое\n{"_"*20}')
                 else:
+                    aprint(artname='sad', number=3)
                     print(f'На складе НЕТ нужное количество\n'
                           f'Попробуйте заказать меньше\n{"_"*20}')
 
